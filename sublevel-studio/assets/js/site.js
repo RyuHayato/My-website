@@ -14,7 +14,14 @@
   var drawerScrim = null;
 
   if (toggle && nav) {
+    function syncNavInert() {
+      var isMobile = window.innerWidth <= 860;
+      var isOpen = toggle.getAttribute("aria-expanded") === "true";
+      nav.inert = isMobile && !isOpen;
+    }
+
     nav.classList.add("is-drawer");
+    syncNavInert();
     drawerScrim = document.createElement("div");
     drawerScrim.className = "mp-drawer-scrim";
     drawerScrim.hidden = true;
@@ -26,9 +33,12 @@
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       toggle.textContent = open ? "Close" : "Menu";
+      syncNavInert();
       drawerScrim.classList.toggle("is-visible", open);
       if (open) {
         drawerScrim.hidden = false;
+        var firstLink = nav.querySelector("a, button");
+        if (firstLink) firstLink.focus();
       } else {
         var delay = reduceMotion.matches ? 0 : 350;
         window.setTimeout(function () {
@@ -59,6 +69,7 @@
 
     window.addEventListener("resize", function () {
       if (window.innerWidth > 860) setNav(false);
+      syncNavInert();
     });
   }
 
@@ -218,6 +229,32 @@
     var ui = {};
     var wait = function (ms) { return reduceMotion.matches ? 0 : ms; };
 
+    function getFocusables(container) {
+      return Array.prototype.filter.call(
+        container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+        function (el) { return el.offsetParent !== null || el.getClientRects().length > 0; }
+      );
+    }
+    function trapFocus(container, event) {
+      var focusables = getFocusables(container);
+      if (!focusables.length) {
+        event.preventDefault();
+        container.focus();
+        return;
+      }
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (event.shiftKey) {
+        if (document.activeElement === first || !container.contains(document.activeElement)) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last || !container.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
     function show(root, focusTarget) {
       root.hidden = false;
       void root.offsetWidth; // paint the closed state before transitioning
@@ -285,6 +322,7 @@
         '<div class="mp-sheet__scrim" data-sheet-close></div>' +
         '<div class="mp-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="mp-sheet-title" tabindex="-1">' +
         '<div class="mp-sheet__handle" role="button" tabindex="0" aria-label="Drag down to close details"></div>' +
+        '<button class="mp-sheet__x" type="button" data-sheet-close aria-label="Close details">×</button>' +
         '<h2 id="mp-sheet-title"></h2>' +
         '<p class="mp-sheet__meta"></p>' +
         '<p class="mp-sheet__desc"></p>' +
@@ -359,9 +397,15 @@
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key !== "Escape") return;
-      closeModal();
-      closeSheet();
+      if (event.key === "Escape") {
+        closeModal();
+        closeSheet();
+        return;
+      }
+      if (event.key === "Tab") {
+        if (modal && !modal.hidden) trapFocus(modal.querySelector(".mp-modal__dialog"), event);
+        else if (sheet && !sheet.hidden) trapFocus(sheet.querySelector(".mp-sheet__panel"), event);
+      }
     });
 
     window.MotionPromptUI = ui;
