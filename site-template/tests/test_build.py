@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from template import build_site, validate_config  # noqa: E402
+from template.render import steps_html  # noqa: E402
 
 DEFAULT = ROOT / "config" / "site.json"
 ALT = ROOT / "config" / "example-alt.json"
@@ -297,6 +298,51 @@ class BuildTests(unittest.TestCase):
             with self.assertRaises(ValueError) as ctx:
                 build_site(cfg, Path(tmp) / "out", SRC)
             self.assertIn("does-not-exist.webp", str(ctx.exception))
+
+    def test_validate_config_src_root_and_asset_checks(self):
+        config = json.loads(DEFAULT.read_text(encoding="utf-8"))
+        # Default src_root resolves site-template/src regardless of CWD
+        self.assertEqual(validate_config(config), [])
+
+        # Missing plate src is caught by validate_config
+        bad_plate = json.loads(DEFAULT.read_text(encoding="utf-8"))
+        first_plate = next(iter(bad_plate["plates"]))
+        bad_plate["plates"][first_plate]["src"] = "assets/img/missing-plate.webp"
+        self.assertTrue(any("missing-plate.webp" in e for e in validate_config(bad_plate)))
+
+        # Missing page script is caught by validate_config
+        bad_script = json.loads(DEFAULT.read_text(encoding="utf-8"))
+        bad_script["pages"][0]["scripts"] = ["assets/js/missing-script.js"]
+        self.assertTrue(any("missing-script.js" in e for e in validate_config(bad_script)))
+
+        # Custom src_root overrides default asset lookup
+        with tempfile.TemporaryDirectory() as tmp:
+            custom_src = Path(tmp) / "src"
+            (custom_src / "assets" / "js").mkdir(parents=True)
+            (custom_src / "assets" / "js" / "custom.js").write_text("", encoding="utf-8")
+            custom_cfg = json.loads(DEFAULT.read_text(encoding="utf-8"))
+            custom_cfg["pages"][0]["scripts"] = ["assets/js/custom.js"]
+            # Fails against default src_root, passes when custom_src has all referenced assets
+            self.assertTrue(any("custom.js" in e for e in validate_config(custom_cfg)))
+            # Copy existing plates & scripts into custom_src to verify full pass with custom src_root
+            for plate in custom_cfg["plates"].values():
+                p_src = plate.get("src", "")
+                if p_src.startswith("assets/"):
+                    target = custom_src / p_src
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(b"")
+            for page in custom_cfg["pages"]:
+                for s in page.get("scripts", []):
+                    if s.startswith("assets/"):
+                        target = custom_src / s
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        target.write_text("", encoding="utf-8")
+            self.assertEqual(validate_config(custom_cfg, src_root=custom_src), [])
+
+    def test_steps_html_merges_extra_class(self):
+        html = steps_html([{"title": "One", "text": "Body"}], extra_class="extra-steps")
+        self.assertTrue(html.startswith('<div class="steps extra-steps">'), html)
+        self.assertNotRegex(html, r'<div[^>]*\bclass=[^>]*\bclass=')
 
 
 if __name__ == "__main__":

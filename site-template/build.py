@@ -38,7 +38,7 @@ def main() -> int:
         print(f"error: invalid JSON in {config_path}: {exc}", file=sys.stderr)
         return 2
 
-    errors = validate_config(config)
+    errors = validate_config(config, src_root=ROOT / "src")
     if errors:
         print("error: config problems:", file=sys.stderr)
         for error in errors:
