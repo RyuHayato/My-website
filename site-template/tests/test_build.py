@@ -271,6 +271,23 @@ class BuildTests(unittest.TestCase):
         # no double hairline boxes remain
         self.assertNotIn("3px double", css)
 
+    def test_ui_polish_tokens_touch_targets_and_overflow_guards(self):
+        css = (SRC / "assets/css/site.css").read_text(encoding="utf-8")
+        for token in (
+            "--touch-min: 44px;",
+            "--dur-fast:",
+            "--dur-base:",
+            "--shadow-card:",
+            "--focus-ring:",
+            "overflow-x: clip;",
+            "min-height: var(--touch-min);",
+        ):
+            self.assertIn(token, css)
+        # Marked cards must clip their corner glow pseudo-elements to prevent 390px overflow
+        marked_match = re.search(r"\.cell--marked,\s*\.cell--project\s*\{([^}]*)\}", css)
+        self.assertIsNotNone(marked_match)
+        self.assertIn("overflow: hidden;", marked_match.group(1))
+
     def test_missing_plate_asset_fails_the_build(self):
         config = json.loads(DEFAULT.read_text(encoding="utf-8"))
         config["plates"]["ghost"] = {"src": "assets/img/does-not-exist.webp", "width": 10, "height": 10}

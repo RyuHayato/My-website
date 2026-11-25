@@ -132,7 +132,7 @@ def prose_html(section: dict, *, include_steps: bool = True) -> str:
     out.append(commands_html(section.get("commands")))
     out.append(terminal_html(section.get("terminal")))
     if section.get("cta"):
-        out.append(f'<p style="margin-top:24px">{button_html(section["cta"])}</p>')
+        out.append(f'<p class="section-cta">{button_html(section["cta"])}</p>')
     return "".join(out)
 
 
@@ -180,7 +180,7 @@ def render_logos(section: dict, config: dict) -> str:
     out.append(f'<div class="eyebrow" data-reveal>{esc(section.get("eyebrow", ""))}</div>')
     out.append(f'<h2 id="{esc(hidden_id)}" class="visually-hidden">{esc(hidden)}</h2>')
     cols = section.get("columns", 4)
-    out.append(f'<div class="grid grid--{esc(cols)}" style="margin-top:22px" data-reveal>')
+    out.append(f'<div class="grid grid--{esc(cols)} logos-grid" data-reveal>')
     out.extend(f'<div class="cell cell--logo">{esc(item)}</div>' for item in section.get("items", []))
     out.append("</div></div></section>")
     return "".join(out)
@@ -207,9 +207,9 @@ def render_cards(section: dict, config: dict) -> str:
         out.extend(_card_item(item, variant, config))
     out.append("</div>")
     if filters:
-        out.append('<noscript><p class="eyebrow" style="margin-top:18px">All items are shown above.</p></noscript>')
+        out.append('<noscript><p class="eyebrow filter-noscript">All items are shown above.</p></noscript>')
     if section.get("cta"):
-        out.append(f'<p style="margin-top:24px">{button_html(section["cta"])}</p>')
+        out.append(f'<p class="section-cta">{button_html(section["cta"])}</p>')
     out.append("</div></section>")
     return "".join(out)
 
@@ -225,11 +225,10 @@ def _card_item(item: dict, variant: str, config: dict) -> list[str]:
         return out
     if variant == "stat":
         size = item.get("value_size", "large")
-        fs = "2.6rem" if size == "large" else "1.8rem"
-        mt = "8px" if size == "large" else "10px"
+        stat_cls = "stat-value stat-value--large" if size == "large" else "stat-value"
         out.append('<div class="cell">')
         out.append(f'<p class="eyebrow">{esc(item.get("eyebrow", ""))}</p>')
-        out.append(f'<p style="font-family:var(--font-display);font-size:{fs};line-height:1.1;margin-top:{mt}">{esc(item.get("value", ""))}</p>')
+        out.append(f'<p class="{stat_cls}">{esc(item.get("value", ""))}</p>')
         if item.get("text"):
             out.append(f"<p>{rich(item['text'])}</p>")
         out.append("</div>")
@@ -246,13 +245,13 @@ def _card_item(item: dict, variant: str, config: dict) -> list[str]:
     if item.get("eyebrow"):
         out.append(f'<p class="eyebrow">{esc(item["eyebrow"])}</p>')
     if item.get("title"):
-        style = ' style="margin-top:16px"' if item.get("status") else (' style="margin-top:12px"' if item.get("eyebrow") else "")
-        out.append(f"<h3{style}>{esc(item['title'])}</h3>")
+        cls = ' class="card-title--spaced"' if item.get("status") else (' class="card-title--tight"' if item.get("eyebrow") else "")
+        out.append(f"<h3{cls}>{esc(item['title'])}</h3>")
     if item.get("text"):
-        out.append(f'<p style="margin:14px 0 0">{rich(item["text"])}</p>')
+        out.append(f'<p class="card-text">{rich(item["text"])}</p>')
     out.append(tags_html(item.get("tags")))
     if item.get("link"):
-        out.append(f'<p style="margin-top:14px"><a href="{esc(item["link"]["href"])}">{esc(item["link"]["text"])}</a></p>')
+        out.append(f'<p class="card-link"><a href="{esc(item["link"]["href"])}">{esc(item["link"]["text"])}</a></p>')
     if item.get("detail"):
         out.append(
             f'<button class="mp-detail" type="button" data-sheet-title="{esc(item.get("title", ""))}" '
@@ -275,7 +274,7 @@ def render_split(section: dict, config: dict) -> str:
     out = [f'<section class="section" aria-labelledby="{esc(sid)}"><div class="wrap two-col">']
     left = ['<div data-reveal>']
     left.append(f'<p class="eyebrow">{esc(section.get("eyebrow", ""))}</p>')
-    left.append(f'<h2 id="{esc(sid)}" style="margin-top:10px">{esc(section.get("title", ""))}</h2>')
+    left.append(f'<h2 id="{esc(sid)}" class="split-title">{esc(section.get("title", ""))}</h2>')
     left.append(prose_html(section))
     left.append("</div>")
     right = plate_html(config, section.get("plate", ""), section.get("plate_caption")) if section.get("plate") else ""
@@ -334,7 +333,7 @@ def render_contact_band(section: dict, config: dict) -> str:
 def render_newsletter(section: dict, config: dict, uid: str) -> str:
     sid = section.get("id", "newsletter-title")
     email_id = f"email-{re.sub(r'[^a-z0-9]+', '-', uid.lower())}"
-    out = [f'<section class="dark" aria-labelledby="{esc(sid)}"><div class="wrap" style="padding-bottom:70px">',
+    out = [f'<section class="dark" aria-labelledby="{esc(sid)}"><div class="wrap newsletter-wrap">',
            '<div class="newsletter" data-reveal>']
     out.append(f'<p class="eyebrow">{esc(section.get("eyebrow", ""))}</p>')
     out.append(f'<h2 id="{esc(sid)}">{esc(section.get("title", ""))}</h2>')
@@ -364,9 +363,9 @@ def render_brief_form(section: dict, config: dict) -> str:
     cls = "dark section" if dark else "section"
     out = [f'<section class="{cls}" aria-labelledby="{esc(sid)}"><div class="wrap two-col">', "<div data-reveal>"]
     out.append(f'<p class="eyebrow">{esc(section.get("eyebrow", ""))}</p>')
-    out.append(f'<h2 id="{esc(sid)}" style="margin-top:10px">{esc(section.get("title", ""))}</h2>')
+    out.append(f'<h2 id="{esc(sid)}" class="split-title">{esc(section.get("title", ""))}</h2>')
     for para in section.get("paragraphs", []):
-        out.append(f'<p style="margin-top:18px">{rich(para)}</p>')
+        out.append(f'<p class="split-lede">{rich(para)}</p>')
     out.append(commands_html(section.get("commands")))
     out.append("</div>")
     confirm = " data-confirm" if section.get("confirm") else ""
@@ -404,9 +403,9 @@ def render_faq(section: dict, config: dict) -> str:
     out = [f'<section class="section" aria-labelledby="{esc(section.get("id", "faq-title"))}"><div class="wrap two-col">',
            "<div data-reveal>"]
     out.append(f'<p class="eyebrow">{esc(section.get("eyebrow", ""))}</p>')
-    out.append(f'<h2 id="{esc(section.get("id", "faq-title"))}" style="margin-top:10px">{esc(section.get("title", ""))}</h2>')
+    out.append(f'<h2 id="{esc(section.get("id", "faq-title"))}" class="split-title">{esc(section.get("title", ""))}</h2>')
     if section.get("lede"):
-        out.append(f'<p style="margin-top:18px">{esc(section["lede"])}</p>')
+        out.append(f'<p class="split-lede">{esc(section["lede"])}</p>')
     out.append("</div>")
     out.append('<div class="mp-acc" data-mp-acc data-reveal>')
     for i, item in enumerate(section.get("items", []), 1):
