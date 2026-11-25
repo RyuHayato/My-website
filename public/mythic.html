@@ -11,9 +11,9 @@
 <style>
 :root{
   --paper:#f2efe6; --paper-warm:#ece7d9; --paper-raised:#f7f5ee;
-  --ink:#16140f; --ink-soft:#4d493f; --ink-faint:#8a8576;
+  --ink:#16140f; --ink-soft:#4d493f; --ink-faint:#666155;
   --rule:#d8d2c2; --rule-strong:#b8b19d; --accent:#b0501f;
-  --night:#16140f; --night-ink:#e8e4d8;
+  --night:#16140f; --night-ink:#e8e4d8; --night-faint:#9e998a;
   --font-display:'EB Garamond',Georgia,serif;
   --font-mono:'IBM Plex Mono',ui-monospace,monospace;
 }
@@ -21,6 +21,10 @@
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:var(--font-display);line-height:1.6;
      padding:12px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:var(--ink);
+  color:var(--paper);padding:.6rem 1rem;font-family:var(--font-mono);font-size:.74rem;
+  text-transform:uppercase;letter-spacing:.1em;text-decoration:none}
+.skip-link:focus,.skip-link:focus-visible{left:16px;top:16px;outline:2px solid var(--accent);outline-offset:2px}
 .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
 .eyebrow{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;
   letter-spacing:.14em;color:var(--ink-faint)}
@@ -28,7 +32,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font-display);li
 /* §7 printed-plate frame */
 .site-frame{position:fixed;inset:12px;border:3px double var(--rule-strong);
   pointer-events:none;z-index:60}
-@media(max-width:600px){.site-frame{inset:8px}body{padding:8px}}
+@media(max-width:600px){.site-frame{inset:8px}body{padding:8px}.wrap{padding:0 16px}}
 
 /* §8 tall ruled navigation band */
 .site-header{border-bottom:1px solid var(--rule);background:var(--paper)}
@@ -36,17 +40,26 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font-display);li
 .brand{display:flex;align-items:center;padding-right:26px;border-right:1px solid var(--rule);
   font-size:1.5rem;font-weight:600;text-decoration:none;color:var(--ink);white-space:nowrap}
 .brand span{color:var(--ink)}
+.brand:focus-visible,.nav-social a:focus-visible,footer a:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px}
 .nav{display:flex;align-items:stretch;list-style:none}
 .nav a{display:flex;align-items:center;padding:0 22px;font-family:var(--font-mono);
   text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--ink);
-  opacity:.55;border-right:1px solid var(--rule);text-decoration:none;white-space:nowrap;
+  opacity:.75;border-right:1px solid var(--rule);text-decoration:none;white-space:nowrap;
   transition:opacity .18s ease,background .18s ease}
 .nav a:hover,.nav a:focus-visible{opacity:1;background:var(--paper-raised)}
+.nav a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .nav-social{margin-left:auto;display:flex;align-items:center}
 .nav-social a{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
 .nav-social a:hover{color:var(--ink-soft)}
 @media(max-width:760px){.nav-social{display:none}.nav a{padding:0 14px;font-size:.64rem;letter-spacing:.12em}}
+@media(max-width:600px){
+  .site-header .wrap{flex-wrap:wrap;min-height:0}
+  .brand{padding:12px 16px 12px 0;border-right:none}
+  .nav{flex-wrap:wrap;width:100%;border-top:1px solid var(--rule)}
+  .nav a{padding:10px 12px}
+}
 
 /* Hero with the skill-generated engraving, faded into paper */
 .hero{position:relative;isolation:isolate;border-bottom:1px solid var(--rule);padding:88px 0 68px;overflow:hidden}
@@ -66,11 +79,13 @@ h1{font-size:clamp(2.8rem,7vw,5.4rem);font-weight:500;line-height:1.05;
   letter-spacing:.1em;color:var(--ink-faint);background:none;border:none;cursor:pointer;
   padding:.2rem}
 .cmd .copy:hover{color:var(--accent)}
+.cmd .copy:focus-visible{color:var(--accent);outline:2px solid var(--accent);outline-offset:2px}
 .btn{display:inline-block;font-family:var(--font-mono);font-size:.74rem;
   text-transform:uppercase;letter-spacing:.1em;border:1px solid var(--ink);
   color:var(--ink);background:var(--paper);padding:.68rem 1.3rem;
   text-decoration:none;margin-top:18px;transition:background .18s ease,color .18s ease}
 .btn:hover{background:var(--ink);color:var(--paper)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .btn.primary{border-color:var(--accent);color:var(--accent)}
 .btn.primary:hover{background:var(--accent);color:var(--paper)}
 
@@ -101,19 +116,26 @@ h1{font-size:clamp(2.8rem,7vw,5.4rem);font-weight:500;line-height:1.05;
 .terminal{background:var(--night);color:var(--night-ink);border:3px double var(--rule-strong);
   padding:22px 24px;font-family:var(--font-mono);font-size:.82rem;line-height:1.9;margin-top:24px}
 .terminal .prompt{color:var(--accent)}
-.terminal .muted{color:var(--ink-faint)}
+.terminal .muted{color:var(--night-faint)}
 .cursor{color:var(--accent);animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
 .section-end{border-top:3px double var(--rule-strong);margin-top:0}
 
 footer{background:var(--night);color:var(--night-ink);padding:30px 12px 38px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  font-family:var(--font-mono);font-size:.7rem;color:var(--ink-faint)}
+  font-family:var(--font-mono);font-size:.7rem;color:var(--night-faint)}
 footer a{color:var(--night-ink);text-decoration:none}
 footer a:hover{color:var(--accent)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cursor{animation:none}
+  .nav a,.btn{transition:none}
+}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#top">Skip to content</a>
 <svg style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.035;mix-blend-mode:multiply;z-index:9999" aria-hidden="true">
   <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter>
   <rect width="100%" height="100%" filter="url(#grain)"/>
