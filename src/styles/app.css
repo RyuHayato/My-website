@@ -1,3 +1,28 @@
+:root {
+  --sl-bg: #080808;
+  --sl-surface: #0e0e10;
+  --sl-ink: #f4f4f2;
+  --sl-ink-muted: #969696;
+  --sl-accent: #ff5c1a;
+  --sl-border: rgba(230, 230, 230, 0.14);
+  --sl-focus-ring: #ff8a3d;
+  --sl-font-sans: "Geist", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --sl-font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sl-duration-fast: 150ms;
+  --sl-duration-base: 220ms;
+  --sl-ease-out: cubic-bezier(0.16, 0.84, 0.24, 1);
+  --threeui-fade-duration: 180ms;
+  --threeui-ease-out: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --sl-duration-fast: 0ms;
+    --sl-duration-base: 0ms;
+    --threeui-fade-duration: 0ms;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,6 +34,8 @@ body,
   height: 100%;
   min-width: 320px;
   margin: 0;
+  background: var(--sl-bg);
+  color: var(--sl-ink);
 }
 
 body {
@@ -21,5 +48,5 @@ body {
   height: 100dvh;
   min-height: 100svh;
   overflow: hidden;
-  background: #080808;
+  background: var(--sl-bg);
 }
