@@ -41,7 +41,7 @@
   border: 0;
   background: #090a0c;
   opacity: 0;
-  transition: opacity 180ms ease-out;
+  transition: opacity var(--threeui-fade-duration, 180ms) var(--threeui-ease-out, ease-out);
   touch-action: none;
 }
 
@@ -1771,5 +1771,16 @@ img.sunset-valley-fallback {
   .atd-retro__item,
   .atd-glass__item {
     transform: none !important;
+  }
+
+  .mechanical-keyboard__frame,
+  .retro-metallic__frame,
+  .japanese-tower-landscape__frame,
+  .landscape-scene__frame,
+  .isometric-motion-grid__frame,
+  .isometric-illustration__frame,
+  .iso-mail-lightshafts__frame,
+  .spark-badge__frame {
+    transition: none;
   }
 }
