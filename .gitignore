@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.vite/
+.codeden/
+.workbuddy-ai/
+shots/
+site-template/dist/
+site-template/dist-alt/

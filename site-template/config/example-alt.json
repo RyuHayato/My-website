@@ -1,0 +1,141 @@
+{
+  "$comment": "ALTERNATE TOPIC SAMPLE — intentionally a completely different subject (Meridian Observatory, a scientific institute). Build with: python build.py --config config/example-alt.json --out dist-alt. This file exists to prove no topic content is baked into the engine.",
+  "identity": {
+    "lang": "en",
+    "title": "Meridian Observatory",
+    "tagline": "Instruments for looking closer",
+    "description": "Meridian Observatory builds open instruments and public datasets for curious minds.",
+    "theme_color": "#0d1117",
+    "brand": { "text": "meridian", "accent": "∘", "aria_label": "Meridian Observatory home", "href": "index.html" },
+    "nav_meta": "telescope array · online",
+    "wordmark": { "text": "MERIDIAN", "accent": "∘", "suffix": "07" },
+    "footer": {
+      "legal": "© Meridian Observatory Institute",
+      "location": "Atacama & remote · open nights",
+      "links": [
+        { "text": "Home", "href": "index.html" },
+        { "text": "Research", "href": "work.html" },
+        { "text": "Programmes", "href": "services.html" },
+        { "text": "About", "href": "studio.html" },
+        { "text": "Contact", "href": "contact.html" }
+      ],
+      "meta_links": [
+        { "text": "Email", "href": "mailto:hello@meridian.example" },
+        { "text": "Data", "href": "lab.html" }
+      ]
+    }
+  },
+  "theme": {
+    "paper": "#0d1117", "paper-warm": "#121924", "paper-raised": "#18202d",
+    "ink": "#e7eef7", "ink-soft": "#b8c6d6", "ink-faint": "#8ca0b6",
+    "rule": "#2b3a4a", "rule-strong": "#56738f", "accent": "#63b7d6", "accent-strong": "#8ed3ea",
+    "night": "#080b10", "night-ink": "#e7eef7", "night-soft": "#a9bed1",
+    "field-border": "#455c74", "field-bg": "#121924", "field-focus": "#1a2330", "error": "#f0a98b"
+  },
+  "nav": [
+    { "label": "Home", "href": "index.html" },
+    { "label": "Research", "href": "work.html" },
+    { "label": "Programmes", "href": "services.html" },
+    { "label": "About", "href": "studio.html" },
+    { "label": "Contact", "href": "contact.html" }
+  ],
+  "ui": {
+    "skip_link": "Skip to content", "menu_open": "Menu", "menu_close": "Close",
+    "menu_aria_open": "Open menu", "menu_aria_close": "Close menu", "primary_nav": "Primary",
+    "copied_label": "Copied", "select_text_label": "Select text",
+    "form_status": "Opening your mail app with the message ready to send.",
+    "fail_email": "Please enter a valid email address.", "fail_name": "Please tell us your name.",
+    "fail_message": "Please add a short message.", "default_email": "hello@meridian.example",
+    "default_subject": "Hello Meridian", "sheet_default_title": "Record",
+    "sheet_handle_label": "Drag down to close details", "modal_title": "Ready to send?",
+    "modal_desc": "Your mail app will open with the message ready to send.",
+    "modal_action": "Open mail app", "modal_close_aria": "Close dialog"
+  },
+  "plates": {
+    "moth": { "src": "assets/img/plate-moth.webp", "width": 1024, "height": 1536, "alt": "A luminous pale moth unfolding from black smoke among silver filigree", "caption": "Figure I — The observer" },
+    "orbit": { "src": "assets/img/plate-orbit.webp", "width": 1024, "height": 1536, "alt": "A glowing celestial armillary sphere of filigree rings", "caption": "Figure II — The instrument" }
+  },
+  "pages": [
+    {
+      "file": "index.html", "title": "Meridian Observatory — Instruments for looking closer",
+      "description": "Meridian Observatory builds open instruments and public datasets.",
+      "sections": [
+        { "type": "hero", "id": "home-title", "plate": "moth", "eyebrow": "Open science • Est. 2017", "title": "Look longer. See further.", "lede": "We design instruments, publish datasets and teach the night sky to anyone who asks.", "buttons": [{ "text": "See the research ↗", "href": "work.html", "style": "accent" }], "index": ["Spectroscopy", "Public data", "Field optics"] },
+        { "type": "logos", "id": "partners-title", "hidden_title": "Partner institutions", "eyebrow": "Partners • Institutions", "columns": 3, "items": ["Northern Light Lab", "Cassini Group", "Field Notes Trust", "Open Sky Union", "Aperture College", "Total Eclipse Fund"] },
+        { "type": "cards", "id": "work-title", "variant": "link", "columns": 3, "eyebrow": "Research • Selected records", "title": "Current work", "lede": "Six open projects, from a low-cost spectrometer to a sky atlas anyone can read.", "cta": { "text": "All research", "href": "work.html" }, "items": [
+          { "number": "01 / 06", "title": "Pocket Spectrometer", "kind": "Hardware", "href": "work.html" },
+          { "number": "02 / 06", "title": "Sky Atlas", "kind": "Open data", "href": "work.html" },
+          { "number": "03 / 06", "title": "Night Logger", "kind": "Fieldwork", "href": "work.html" },
+          { "number": "04 / 06", "title": "Lens Bank", "kind": "Optics", "href": "work.html" },
+          { "number": "05 / 06", "title": "Transit Watch", "kind": "Community", "href": "work.html" },
+          { "number": "06 / 06", "title": "Quiet Hours", "kind": "Publication", "href": "work.html" }
+        ] },
+        { "type": "split", "id": "ethos-title", "plate": "orbit", "eyebrow": "Ethos • Open by default", "title": "Knowledge should travel.", "paragraphs": ["Every instrument we build comes with drawings, source and a plain-language guide. If a curious person can build it, we have done our job."], "commands": [{ "num": "1.", "text": "curl https://meridian.example/index.txt", "copy": "curl https://meridian.example/index.txt" }] },
+        { "type": "contact_band", "id": "contact-title", "eyebrow": "Contact • Collaborations", "title": "Bring us a question.", "email": "hello@meridian.example", "cta": { "text": "Write to us ↗", "href": "contact.html" } },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Dispatch — issue 07", "title": "Notes from the night.", "text": "One letter a month: what we saw, what we built and what we got wrong.", "subject": "Meridian dispatch signup" }
+      ], "scripts": []
+    },
+    {
+      "file": "work.html", "title": "Research — Meridian Observatory", "description": "Open research records from Meridian Observatory.",
+      "sections": [
+        { "type": "hero", "id": "work-title", "plate": "orbit", "eyebrow": "Research index • Six records", "title": "Evidence, in public.", "lede": "Methods, data and results — written so another team could repeat them.", "index": ["Hardware", "Data", "Community"] },
+        { "type": "cards", "id": "records-title", "variant": "detail", "columns": 2, "eyebrow": "Records • Filter by field", "title": "Research records", "lede": "Choose a field to narrow the list.", "filters": [{ "key": "all", "label": "All" }, { "key": "hardware", "label": "Hardware" }, { "key": "data", "label": "Data" }, { "key": "community", "label": "Community" }], "items": [
+          { "number": "01 / 06", "title": "Pocket Spectrometer", "text": "A sub-200-dollar spectrograph with a documented calibration path.", "tags": ["Hardware", "Optics"], "kind": "hardware", "detail": true },
+          { "number": "02 / 06", "title": "Sky Atlas", "text": "A machine-readable atlas with stable identifiers and open licences.", "tags": ["Data", "Catalogue"], "kind": "data", "detail": true },
+          { "number": "03 / 06", "title": "Night Logger", "text": "Field notes from twelve months of clear-sky observations.", "tags": ["Fieldwork"], "kind": "data", "detail": true },
+          { "number": "04 / 06", "title": "Lens Bank", "text": "A shared inventory of surplus optics for schools and clubs.", "tags": ["Optics", "Library"], "kind": "hardware", "detail": true },
+          { "number": "05 / 06", "title": "Transit Watch", "text": "A community programme for timing planetary transits.", "tags": ["Community", "Education"], "kind": "community", "detail": true },
+          { "number": "06 / 06", "title": "Quiet Hours", "text": "A paper on light pollution and measured night-sky brightness.", "tags": ["Publication"], "kind": "community", "detail": true }
+        ] },
+        { "type": "steps", "id": "method-title", "eyebrow": "Method • How we work", "title": "Measure, publish, repeat.", "lede": "The same short rhythm for every project.", "items": [
+          { "title": "Frame the question", "text": "Write down what would count as an answer before touching the instrument." },
+          { "title": "Build in the open", "text": "Drawings, code and failures are published as we go." },
+          { "title": "Publish the record", "text": "Data, method and result ship together with a stable identifier." }
+        ] },
+        { "type": "contact_band", "id": "work-contact-title", "eyebrow": "Next • Partner with us", "title": "Have a dataset worth opening?", "email": "data@meridian.example", "cta": { "text": "Start a conversation ↗", "href": "contact.html" } }
+      ], "scripts": []
+    },
+    {
+      "file": "services.html", "title": "Programmes — Meridian Observatory", "description": "Programmes and access at Meridian Observatory.",
+      "sections": [
+        { "type": "hero", "id": "services-title", "plate": "moth", "eyebrow": "Programmes • Access & learning", "title": "The sky is a public resource.", "lede": "Field courses, instrument loans and open data — built for schools, clubs and independent researchers.", "index": ["Field courses", "Instrument loans", "Open data"] },
+        { "type": "cards", "id": "programmes-title", "variant": "card", "columns": 2, "eyebrow": "Three programmes", "title": "Ways in.", "items": [
+          { "eyebrow": "01 / Learn", "title": "Field Courses", "text": "Three nights under real skies, with a telescope and a notebook.", "tags": ["Schools", "Adults"] },
+          { "eyebrow": "02 / Borrow", "title": "Instrument Loans", "text": "Borrow a tested kit for a term and return it with a story.", "tags": ["Optics", "Community"] },
+          { "eyebrow": "03 / Read", "title": "Open Data", "text": "Every catalogue and light curve we publish, in machine-readable form.", "tags": ["Datasets", "APIs"] }
+        ] },
+        { "type": "faq", "id": "faq-title", "eyebrow": "Questions • Before you apply", "title": "Short answers.", "lede": "The things people ask most often.", "items": [
+          { "q": "Do I need my own telescope?", "a": "No. Loans and field kits are available for every programme." },
+          { "q": "Is the data really open?", "a": "Yes, under a permissive licence with stable identifiers." },
+          { "q": "Can schools join?", "a": "Yes, we run term-length cohorts for classes and clubs." }
+        ] },
+        { "type": "contact_band", "id": "contact-title", "eyebrow": "Contact • Programmes", "title": "Ask for the details.", "email": "programmes@meridian.example", "cta": { "text": "Get in touch ↗", "href": "contact.html" } }
+      ], "scripts": []
+    },
+    {
+      "file": "studio.html", "title": "About — Meridian Observatory", "description": "About Meridian Observatory.",
+      "sections": [
+        { "type": "hero", "id": "studio-title", "plate": "orbit", "eyebrow": "About • Atacama & remote", "title": "A small team, a wide sky.", "lede": "Observers, engineers and teachers working across time zones.", "index": ["Founded 2017", "Open nights", "Four time zones"] },
+        { "type": "cards", "id": "facts-title", "variant": "stat", "columns": 3, "eyebrow": "Colophon • In numbers", "hidden_title": "In numbers", "items": [
+          { "eyebrow": "Founded", "value": "2017", "text": "Independent from the start." },
+          { "eyebrow": "Sites", "value": "2", "text": "Atacama and a remote room." },
+          { "eyebrow": "Datasets", "value": "31", "text": "Public and documented." }
+        ] },
+        { "type": "split", "id": "people-title", "plate": "moth", "eyebrow": "People • How we work", "title": "Close to the data.", "paragraphs": ["The people who take the measurements are the people who clean them and publish them. No layer in between."], "steps": [{ "title": "Measure twice", "text": "Field notes are cross-checked before a record is opened." }, { "title": "Publish plainly", "text": "A dataset without a readable description is not finished." }] },
+        { "type": "contact_band", "id": "contact-title", "eyebrow": "Say hello", "title": "Come ask something.", "email": "hello@meridian.example", "cta": { "text": "Get in touch ↗", "href": "contact.html" } }
+      ], "scripts": []
+    },
+    {
+      "file": "contact.html", "title": "Contact — Meridian Observatory", "description": "Contact Meridian Observatory.",
+      "sections": [
+        { "type": "hero", "id": "contact-title", "plate": "moth", "eyebrow": "Contact • New work & questions", "title": "Send us a signal.", "lede": "Tell us what you are trying to observe, build or understand.", "buttons": [{ "text": "hello@meridian.example", "href": "mailto:hello@meridian.example", "style": "accent" }], "index": ["Atacama & remote", "Open nights", "Reply within two days"] },
+        { "type": "brief_form", "id": "brief-title", "dark": true, "eyebrow": "Enquiry • One message", "title": "Start with the question.", "paragraphs": ["A few lines are enough. We reply with questions and a point of view."], "recipient": "hello@meridian.example", "subject": "New enquiry — Meridian Observatory", "confirm": true, "submit": "Send the enquiry ↗", "fields": [
+          { "name": "name", "label": "Your name", "type": "text", "autocomplete": "name", "placeholder": "Your name", "required": true },
+          { "name": "email", "label": "Email address", "type": "email", "autocomplete": "email", "placeholder": "you@example.com", "required": true },
+          { "name": "message", "label": "What are you observing?", "type": "textarea", "placeholder": "A few lines about the project.", "required": true, "wide": true }
+        ] },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Dispatch — issue 07", "title": "Notes from the night.", "text": "One letter a month from the observatory.", "subject": "Meridian dispatch signup" }
+      ], "scripts": []
+    }
+  ]
+}

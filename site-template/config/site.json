@@ -1,0 +1,452 @@
+{
+  "$comment": "TOPIC CONFIG — this is the only file you edit to change the subject matter. Copy to example-alt.json and build with --config to make a second site. Keys are grouped: identity, theme, nav, footer, ui strings, plates, then pages. 'music' is optional: remove it to drop the soundtrack dock entirely.",
+
+  "music": {
+    "videoId": "5VAZeBS7fKM",
+    "title": "pyro (slowed)",
+    "artist": "SHSHA MA",
+    "volume": 50,
+    "label": "VIBE",
+    "onLabel": "Sound on",
+    "offLabel": "Muted",
+    "hint": "Soundtrack starting — tap anywhere if your browser holds it back",
+    "errorLabel": "Soundtrack unavailable",
+    "retryLabel": "Retry soundtrack",
+    "watchLabel": "Open soundtrack on YouTube"
+  },
+
+  "identity": {
+    "lang": "en",
+    "title": "sublevel.studio",
+    "tagline": "We build the stuff people remember",
+    "description": "sublevel.studio is a digital studio and brand workshop building identities, products and experiences people remember.",
+    "theme_color": "#14120e",
+    "brand": { "text": "sublevel", "accent": ".", "aria_label": "sublevel.studio home", "href": "index.html" },
+    "nav_meta": "agent@sublevel online",
+    "wordmark": { "text": "SUBLEVEL", "accent": ".", "suffix": "26" },
+    "footer": {
+      "legal": "© sublevel.studio LLC",
+      "location": "Kyoto & remote · open late",
+      "links": [
+        { "text": "Home", "href": "index.html" },
+        { "text": "Work", "href": "work.html" },
+        { "text": "Services", "href": "services.html" },
+        { "text": "Studio", "href": "studio.html" },
+        { "text": "Lab", "href": "lab.html" },
+        { "text": "Contact us", "href": "contact.html" }
+      ],
+      "meta_links": [
+        { "text": "Email", "href": "mailto:hello@sublevel.studio" },
+        { "text": "X", "href": "lab.html" },
+        { "text": "Instagram", "href": "lab.html" },
+        { "text": "GitHub", "href": "lab.html" },
+        { "text": "LinkedIn", "href": "lab.html" }
+      ]
+    }
+  },
+
+  "theme": {
+    "paper": "#0f0e0c",
+    "paper-warm": "#151310",
+    "paper-raised": "#1b1815",
+    "ink": "#f1ecdf",
+    "ink-soft": "#ccc5b4",
+    "ink-faint": "#9a9280",
+    "rule": "#37322a",
+    "rule-strong": "#8a7a5c",
+    "accent": "#d59a5e",
+    "accent-strong": "#eeb883",
+    "night": "#0a0908",
+    "night-ink": "#f1ecdf",
+    "night-soft": "#c8c1b0",
+    "field-border": "#6f6350",
+    "field-bg": "#191612",
+    "field-focus": "#211c15",
+    "error": "#e07a5a"
+  },
+
+  "nav": [
+    { "label": "Home", "href": "index.html" },
+    { "label": "Work", "href": "work.html" },
+    { "label": "Services", "href": "services.html" },
+    { "label": "Studio", "href": "studio.html" },
+    { "label": "Lab", "href": "lab.html" },
+    { "label": "Contact", "href": "contact.html" }
+  ],
+
+  "ui": {
+    "skip_link": "Skip to content",
+    "menu_open": "Menu",
+    "menu_close": "Close",
+    "menu_aria_open": "Open menu",
+    "menu_aria_close": "Close menu",
+    "primary_nav": "Primary",
+    "copied_label": "Copied",
+    "select_text_label": "Select text",
+    "form_status": "Opening your mail app with the message ready to send.",
+    "fail_email": "Please enter a valid email address.",
+    "fail_name": "Please tell us your name.",
+    "fail_message": "Please add a short message.",
+    "default_email": "hello@sublevel.studio",
+    "default_subject": "Hello sublevel",
+    "sheet_default_title": "Details",
+    "sheet_handle_label": "Drag down to close details",
+    "modal_title": "Ready to send?",
+    "modal_desc": "Your mail app will open with the message ready to send. Nothing is sent until you press send there.",
+    "modal_action": "Open mail app",
+    "modal_close_aria": "Close dialog"
+  },
+
+  "plates": {
+    "moth": { "src": "assets/img/plate-moth.webp", "width": 1024, "height": 1536, "alt": "A luminous pale moth spreading translucent wings out of black smoke, framed by silver filigree", "caption": "Plate I — The maker, out of the smoke" },
+    "filigree": { "src": "assets/img/plate-filigree.webp", "width": 1024, "height": 1536, "alt": "A glowing white butterfly resting on an ornate gothic filigree cross in a dark void", "caption": "Plate I — The maker at work" },
+    "wing": { "src": "assets/img/plate-wing.webp", "width": 1024, "height": 1536, "alt": "A close study of a moth wing like dark stained glass, veined with ember light", "caption": "Plate III — A study in form and restraint" },
+    "orbit": { "src": "assets/img/plate-orbit.webp", "width": 1024, "height": 1536, "alt": "A glowing celestial armillary sphere of silver filigree rings around a small ember core", "caption": "Plate II — An instrument for finding one's bearing" }
+  },
+
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "sublevel.studio — We build the stuff people remember",
+      "description": "sublevel.studio is a digital studio and brand workshop building identities, products and experiences people remember.",
+      "sections": [
+        {
+          "type": "hero", "id": "home-title", "plate": "moth",
+          "eyebrow": "Independent studio & brand workshop • Est. 2019",
+          "title": "We build the stuff people remember.",
+          "lede": "We team up with ambitious founders, scale-ups and brands to turn strategy into products, identities and experiences that actually ship.",
+          "buttons": [
+            { "text": "See the work ↗", "href": "work.html", "style": "accent" },
+            { "text": "Start a project", "href": "contact.html" }
+          ],
+          "index": ["Websites & features", "Visual branding", "IRL experiences", "Marketing execution"]
+        },
+        {
+          "type": "logos", "id": "trusted-title", "hidden_title": "Trusted by the builders",
+          "eyebrow": "Trusted by the builders • Selected partners", "columns": 4,
+          "items": ["Northwind Labs", "Halide", "Quillworks", "Lumenary", "Kestrel", "Vantagefield", "Cobaltine", "Moonrake", "Harborlight", "Meridiana", "Foundryhouse", "Signalhaus"]
+        },
+        {
+          "type": "cards", "id": "featured-title", "variant": "link", "columns": 4,
+          "eyebrow": "Work • Eight selected builds", "title": "Featured Projects",
+          "lede": "Eight selected builds from the last eighteen months — brand systems, product launches and a few experiments that got out of hand.",
+          "cta": { "text": "Read the full index", "href": "work.html" },
+          "items": [
+            { "number": "01 / 08", "title": "Halide Launch", "kind": "Product launch • Web", "href": "work.html" },
+            { "number": "02 / 08", "title": "Northwind Labs", "kind": "Identity • Product", "href": "work.html" },
+            { "number": "03 / 08", "title": "Lumenary", "kind": "Digital experience", "href": "work.html" },
+            { "number": "04 / 08", "title": "Quillworks", "kind": "Editorial platform", "href": "work.html" },
+            { "number": "05 / 08", "title": "Kestrel Studios", "kind": "Identity • IRL", "href": "work.html" },
+            { "number": "06 / 08", "title": "Cobaltine", "kind": "Campaign • Growth", "href": "work.html" },
+            { "number": "07 / 08", "title": "Shop Moonrake", "kind": "Commerce • Web", "href": "work.html" },
+            { "number": "08 / 08", "title": "Signalhaus", "kind": "Identity • Web", "href": "work.html" }
+          ]
+        },
+        {
+          "type": "cards", "id": "caps-title", "variant": "card", "columns": 4,
+          "eyebrow": "Capabilities • What we do", "title": "Built end to end.",
+          "lede": "From pre-launch teasers to full brand platforms, we take an idea from the first sketch to the thing that ships.",
+          "cta": { "text": "All capabilities", "href": "services.html" },
+          "items": [
+            { "title": "Websites & Features", "text": "Sites that earn attention and turn it into action.", "tags": ["Strategy", "UX/UI", "Engineering"] },
+            { "title": "Visual Branding", "text": "Systems that scale without going stale.", "tags": ["Identity", "Brand systems"] },
+            { "title": "IRL Experience Design", "text": "In-person moments people remember long after the doors close.", "tags": ["Space", "Keynote", "Interactive"] },
+            { "title": "Marketing Execution", "text": "Assets that drive awareness, demand and conversion.", "tags": ["Campaign", "Growth", "Sales"] }
+          ]
+        },
+        {
+          "type": "split", "id": "approach-title", "plate": "filigree",
+          "eyebrow": "Approach • No shortcuts", "title": "Bold, precise work that leaves a mark.",
+          "paragraphs": [
+            "We're here to make the extraordinary. No shortcuts — just a small team that thinks in systems, sweats the details and stays close to the work from first sketch to launch day.",
+            "Strategy, design and engineering sit at the same table. That means fewer handoffs, sharper decisions and things that ship with their character intact."
+          ],
+          "commands": [
+            { "num": "1.", "text": "curl https://sublevel.studio/llms.txt", "copy": "curl https://sublevel.studio/llms.txt" },
+            { "num": "2.", "text": "hello@sublevel.studio", "copy": "hello@sublevel.studio" }
+          ],
+          "terminal": { "label": "Studio index terminal output", "lines": [
+            { "text": "studio --index", "kind": "prompt" },
+            { "text": "strategy & identity   online", "kind": "muted" },
+            { "text": "product & engineering   online", "kind": "muted" },
+            { "text": "lab experiments   03 active", "kind": "muted" },
+            { "text": "", "kind": "prompt", "cursor": true }
+          ] }
+        },
+        {
+          "type": "cards", "id": "lab-title", "variant": "card", "columns": 3,
+          "eyebrow": "Lab • Field experiments", "title": "The side door.",
+          "lede": "Things we build when nobody asks. Small, strange, occasionally useful — and always a way to learn something we can bring back to the main work.",
+          "cta": { "text": "Enter the lab", "href": "lab.html" },
+          "items": [
+            { "status": "Live", "title": "Sublevel Defender", "text": "An arcade cabinet game with a scoreboard that takes itself far too seriously." },
+            { "status": "Live", "title": "SBLVL SHOT", "text": "Drag, release, shoot. A basketball game built for a single perfect afternoon." },
+            { "status": "Archive", "title": "Seven CRT Demos", "text": "A browsable wall of moving images, each one a small experiment in form." }
+          ]
+        },
+        { "type": "contact_band", "id": "contact-title", "eyebrow": "Contact • New business", "title": "Let's build something loud.", "email": "hello@sublevel.studio", "cta": { "text": "Tell us your idea ↗", "href": "contact.html" } },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Newsletter — dispatch 026", "title": "Want the good stuff first?", "text": "Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Unsubscribe in one click.", "subject": "Newsletter signup — dispatch 026" }
+      ],
+      "scripts": []
+    },
+
+    {
+      "file": "work.html",
+      "title": "Work — sublevel.studio",
+      "description": "Featured work from sublevel.studio — brand systems, product launches, websites and a few experiments that got out of hand.",
+      "sections": [
+        {
+          "type": "hero", "id": "work-title", "plate": "filigree",
+          "eyebrow": "Work index • Eight selected builds / 18 months",
+          "title": "Attentions earned, not bought.",
+          "lede": "Eight selected builds from the last eighteen months — brand systems, product launches and a few experiments that got out of hand.",
+          "index": ["Brand systems", "Product launches", "Commerce", "Experiments"]
+        },
+        {
+          "type": "cards", "id": "projects-title", "variant": "detail", "columns": 2,
+          "eyebrow": "Catalogue • Filter by discipline", "title": "Featured Projects",
+          "lede": "Every project below was designed and shipped with the same small team. Choose a discipline to narrow the plate.",
+          "filters": [
+            { "key": "all", "label": "All work" }, { "key": "brand", "label": "Brand" },
+            { "key": "product", "label": "Product" }, { "key": "experience", "label": "Experience" },
+            { "key": "campaign", "label": "Campaign" }
+          ],
+          "items": [
+            { "number": "01 / 08", "title": "Halide Launch", "text": "A teaser-to-launch system that turned a private beta into a public moment, with a site that kept its nerve under traffic.", "tags": ["Web", "Product strategy", "Motion"], "kind": "product", "detail": true },
+            { "number": "02 / 08", "title": "Northwind Labs", "text": "An identity and product story for a research lab shipping serious tools into the wild.", "tags": ["Identity", "Brand system", "Web"], "kind": "brand", "detail": true },
+            { "number": "03 / 08", "title": "Lumenary", "text": "A luminous product experience built around motion, clarity and a very stubborn idea about how software should feel.", "tags": ["UX/UI", "Engineering", "3D"], "kind": "product", "detail": true },
+            { "number": "04 / 08", "title": "Quillworks", "text": "An editorial platform that makes a small team sound like a large one — and makes publishing feel like a craft again.", "tags": ["Editorial", "Design system", "Web"], "kind": "product", "detail": true },
+            { "number": "05 / 08", "title": "Kestrel Studios", "text": "A brand platform and keynote environment for a studio that builds worlds you can walk through.", "tags": ["Identity", "Keynote", "IRL"], "kind": "experience", "detail": true },
+            { "number": "06 / 08", "title": "Cobaltine", "text": "Campaign content and a conversion path for a materials company with a loud secret.", "tags": ["Campaign", "Growth", "Content"], "kind": "campaign", "detail": true },
+            { "number": "07 / 08", "title": "Shop Moonrake", "text": "A storefront with the personality of a shop you want to wander into, right down to the last small detail.", "tags": ["Commerce", "UX/UI", "Identity"], "kind": "product", "detail": true },
+            { "number": "08 / 08", "title": "Signalhaus", "text": "A signal-first identity for a team that makes sense of noisy markets — quiet where it matters, unmistakable where it counts.", "tags": ["Identity", "Web", "Art direction"], "kind": "brand", "detail": true }
+          ]
+        },
+        {
+          "type": "logos", "id": "clients-title", "hidden_title": "Trusted by the builders",
+          "eyebrow": "Partners • Trusted by the builders", "columns": 4,
+          "items": ["Northwind Labs", "Halide", "Quillworks", "Lumenary", "Kestrel", "Vantagefield", "Cobaltine", "Moonrake", "Harborlight", "Meridiana", "Foundryhouse", "Signalhaus"]
+        },
+        {
+          "type": "split", "id": "making-title", "plate": "orbit", "plate_caption": "Plate II — An instrument for finding one's bearing",
+          "eyebrow": "Method • How the work gets made", "title": "One table, every discipline.",
+          "paragraphs": ["We keep strategy, design and engineering in the same room. The result is a shorter path from the first question to the thing people actually use."],
+          "steps": [
+            { "title": "Find the signal", "text": "We listen, audit and ask the awkward questions until the real problem is on the table." },
+            { "title": "Draw the system", "text": "Identity, interface and story are designed together — never as separate handoffs." },
+            { "title": "Build it properly", "text": "We engineer the thing, test it in the world and keep the character intact." },
+            { "title": "Leave a mark", "text": "Launch, learn, iterate. Then we do it again with the next idea." }
+          ]
+        },
+        { "type": "contact_band", "id": "work-contact-title", "eyebrow": "Next • Your project here", "title": "Let's build something loud.", "email": "sales@sublevel.studio", "cta": { "text": "Start a conversation ↗", "href": "contact.html" } },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Newsletter — dispatch 026", "title": "Want the good stuff first?", "text": "Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Unsubscribe in one click.", "subject": "Newsletter signup — dispatch 026" }
+      ],
+      "scripts": []
+    },
+
+    {
+      "file": "services.html",
+      "title": "Services — sublevel.studio",
+      "description": "Capabilities at sublevel.studio: websites and features, visual branding, IRL experience design and marketing execution.",
+      "sections": [
+        {
+          "type": "hero", "id": "services-title", "plate": "wing",
+          "eyebrow": "Capabilities • Strategy to launch", "title": "No shortcuts. Just the work.",
+          "lede": "We're here to make the extraordinary — bold, precise work that raises the bar & leaves a mark.",
+          "index": ["Product strategy", "Visual identity", "Space design", "Campaign execution"]
+        },
+        {
+          "type": "cards", "id": "caps-title", "variant": "card", "columns": 2,
+          "eyebrow": "Four disciplines • One team", "title": "Capabilities",
+          "lede": "We plug in where we're needed most, and stay for as long as the idea takes to become real.",
+          "items": [
+            { "eyebrow": "01 / Web", "title": "Websites & Features", "text": "From pre-launch teasers to full redesigns, we design and engineer sites that earn attention and turn it into action.", "tags": ["Product Strategy", "UX/UI Design", "Engineering", "3D & Motion"] },
+            { "eyebrow": "02 / Identity", "title": "Visual Branding", "text": "From lean identities for new companies to full brand platforms for category leaders, we build systems that scale without going stale.", "tags": ["Visual Identity", "Brand Systems"] },
+            { "eyebrow": "03 / In person", "title": "IRL Experience Design", "text": "From annual summits to weekend pop-ups, we design in-person moments people remember long after the doors close.", "tags": ["Visual Identity", "Space Design", "Keynote Design", "Digital & Interactive"] },
+            { "eyebrow": "04 / Outward", "title": "Marketing Execution", "text": "From brand to product marketing, we plug into marketing teams to ship the assets that drive awareness, demand and conversion.", "tags": ["Campaign Content", "Growth Experiments", "Sales Materials"] }
+          ]
+        },
+        {
+          "type": "steps", "id": "process-title", "eyebrow": "Process • Four movements",
+          "title": "From first mark to final launch.",
+          "lede": "A clear rhythm keeps ambitious work moving without sanding off the parts that make it memorable.",
+          "items": [
+            { "title": "Listen & locate", "text": "We start with the business, the audience and the thing nobody has said out loud yet." },
+            { "title": "Set the system", "text": "Voice, identity, interface and interaction are drawn as one coherent set of decisions." },
+            { "title": "Make it real", "text": "Design and engineering work together in the open, with real prototypes and honest feedback." },
+            { "title": "Ship & sharpen", "text": "We launch, measure, and keep refining until the work feels inevitable." }
+          ]
+        },
+        {
+          "type": "split", "id": "together-title", "plate": "filigree", "plate_caption": "Plate I — The maker at work",
+          "eyebrow": "Ways to work together", "title": "A partner, not a vendor.",
+          "paragraphs": [
+            "We work best as an extension of the team — close enough to care about the details, independent enough to tell you when an idea needs another pass.",
+            { "text": "Most engagements begin with a short scoping conversation and end with something live in the world. New business goes to ", "link": { "text": "sales@sublevel.studio", "href": "mailto:sales@sublevel.studio" }, "suffix": "." }
+          ],
+          "commands": [ { "num": "›", "text": "sales@sublevel.studio", "copy": "sales@sublevel.studio" } ],
+          "cta": { "text": "Start a project", "href": "contact.html", "style": "accent" }
+        },
+        { "type": "contact_band", "id": "services-contact-title", "eyebrow": "Contact • Brief us", "title": "Tell us what you're making.", "email": "hello@sublevel.studio", "cta": { "text": "Send a brief ↗", "href": "contact.html" } },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Newsletter — dispatch 026", "title": "Want the good stuff first?", "text": "Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Ununsubscribe in one click.", "subject": "Newsletter signup — dispatch 026" }
+      ],
+      "scripts": []
+    },
+
+    {
+      "file": "studio.html",
+      "title": "Studio — sublevel.studio",
+      "description": "Inside sublevel.studio — a small independent design and engineering studio in Kyoto, working remotely everywhere.",
+      "sections": [
+        {
+          "type": "hero", "id": "studio-title", "plate": "moth",
+          "eyebrow": "The studio • Kyoto & remote • Est. 2019", "title": "Small studio. Long memory.",
+          "lede": "We're here to make the extraordinary. No shortcuts — just bold, precise work that raises the bar & leaves a mark.",
+          "index": ["Independent since 2019", "Dispatch 026", "Open late"]
+        },
+        {
+          "type": "cards", "id": "facts-title", "variant": "stat", "columns": 4,
+          "eyebrow": "Colophon • The studio in numbers", "hidden_title": "The studio in numbers",
+          "items": [
+            { "eyebrow": "Founded", "value": "2019", "text": "An independent studio from the start.", "value_size": "large" },
+            { "eyebrow": "Base", "value": "Kyoto & remote", "text": "Working across time zones by design.", "value_size": "medium" },
+            { "eyebrow": "Dispatches", "value": "026", "text": "A monthly letter, never more than that.", "value_size": "large" },
+            { "eyebrow": "Partners", "value": "12", "text": "Teams we've built things with.", "value_size": "large" }
+          ]
+        },
+        {
+          "type": "split", "id": "people-title", "plate": "wing", "plate_caption": "Plate III — A study in form and restraint",
+          "eyebrow": "People • How we work", "title": "Close to the work.",
+          "paragraphs": [
+            "Strategy, design and engineering sit at the same table. The people who make the decisions are the people who draw the details and ship the code.",
+            "We stay small on purpose. That means direct conversations, fast calls and no layer between you and the work."
+          ],
+          "steps": [
+            { "title": "Think in systems", "text": "A brand is a set of decisions, not a single image. We build things that hold together at every scale." },
+            { "title": "Make it tangible", "text": "Prototypes early, arguments honest, details measured twice." },
+            { "title": "Stay until it ships", "text": "The last five percent is where the character lives. We don't hand that part off." }
+          ]
+        },
+        {
+          "type": "cards", "id": "roles-title", "variant": "card", "columns": 2,
+          "eyebrow": "Careers • Join the studio", "title": "Open roles",
+          "lede": "Good work needs good people. If you care about craft, clarity and the strange little details, we should talk.",
+          "items": [
+            { "status": "Open", "title": "Visual Designer", "text": "Identity, art direction and systems for brands that need to mean something.", "link": { "text": "Apply by email ↗", "href": "mailto:hello@sublevel.studio?subject=Visual%20Designer%20application" } },
+            { "status": "Open", "title": "Creative Developer", "text": "Front-end craft, interaction and the occasional WebGL detour.", "link": { "text": "Apply by email ↗", "href": "mailto:hello@sublevel.studio?subject=Creative%20Developer%20application" } }
+          ]
+        },
+        { "type": "contact_band", "id": "studio-contact-title", "eyebrow": "Say hello", "title": "Come say something interesting.", "email": "hello@sublevel.studio", "cta": { "text": "Get in touch ↗", "href": "contact.html" } },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Newsletter — dispatch 026", "title": "Want the good stuff first?", "text": "Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Unsubscribe in one click.", "subject": "Newsletter signup — dispatch 026" }
+      ],
+      "scripts": []
+    },
+
+    {
+      "file": "lab.html",
+      "title": "Lab — sublevel.studio",
+      "description": "The sublevel.studio lab — games, experiments and field notes from the side door.",
+      "sections": [
+        {
+          "type": "hero", "id": "lab-title", "plate": "orbit",
+          "eyebrow": "Lab • Field notes / Dispatch 026", "title": "Things we build when nobody asks.",
+          "lede": "Small, strange, occasionally useful — and always a way to learn something we can carry back to the main work.",
+          "index": ["Sublevel Defender", "SBLVL SHOT", "Seven CRT demos"]
+        },
+        {
+          "type": "cards", "id": "experiments-title", "variant": "card", "columns": 3,
+          "eyebrow": "Experiments • Three on the bench", "title": "The side door.",
+          "lede": "Each experiment starts as a question about interaction, performance or pure mischief. Some of them get out of hand.",
+          "items": [
+            { "status": "Live", "title": "Sublevel Defender", "text": "An arcade cabinet game built for a room with a scoreboard. Move, fire, survive, and try not to take it personally.", "tags": ["Arcade", "Gameplay", "WebGL"] },
+            { "status": "Live", "title": "SBLVL SHOT", "text": "Drag to aim, release to shoot. A tiny basketball study in physics, timing and the perfect afternoon.", "tags": ["Physics", "Interaction", "Motion"] },
+            { "status": "Archive", "title": "Seven CRT Demos", "text": "A browsable wall of moving images — Halide, Lumenary, Kestrel, Moonrake, Northwind, Cobaltine and one very loud defender.", "tags": ["Archive", "Art direction", "Video"] }
+          ]
+        },
+        {
+          "type": "motion", "id": "motion-title", "eyebrow": "On the bench • Three moving studies", "title": "Motion notes.",
+          "lede": "Short loops from the Motion Prompt library, running here as plain Canvas 2D studies. Each one is a pure drawing of time.",
+          "cells": [
+            { "key": "fpv", "width": 539, "height": 208, "label": "01 — FPV drone shot", "source": "Motion Prompt #035 ↗", "href": "https://showheyohtaki.github.io/motion-prompt/#035", "aria": "Animated first-person flight between two rows of trees" },
+            { "key": "kaleidoscope", "width": 539, "height": 208, "label": "02 — Kaleidoscope", "source": "Motion Prompt #135 ↗", "href": "https://showheyohtaki.github.io/motion-prompt/#135", "aria": "Animated eight-way mirrored pattern spreading from the centre" },
+            { "key": "lineBoil", "width": 539, "height": 208, "label": "03 — Line boil", "source": "Motion Prompt #136 ↗", "href": "https://showheyohtaki.github.io/motion-prompt/#136", "aria": "Animated hand-drawn line study that wobbles frame by frame", "wide": true }
+          ]
+        },
+        {
+          "type": "code_split", "id": "index-title", "eyebrow": "Machine index • Plain text, no ornament", "title": "Readable by anyone.",
+          "paragraphs": ["The studio index is also published as plain text, so people and machines can read the same page without a script in the way. This is the local transcription."],
+          "commands": [ { "num": "›", "text": "curl https://sublevel.studio/llms.txt", "copy": "curl https://sublevel.studio/llms.txt" } ],
+          "code_label": "Machine-readable studio index",
+          "code": "SUBLEVEL.STUDIO — INDEX\n\nNAME:      sublevel.studio\nTYPE:      digital studio & brand workshop\nBASE:      Kyoto & remote\nFOUNDED:   2019\n\nCAPABILITIES\n- Websites & features\n- Visual branding\n- IRL experience design\n- Marketing execution\n\nSELECTED WORK\nHalide Launch, Northwind Labs, Lumenary,\nQuillworks, Kestrel Studios, Cobaltine,\nShop Moonrake, Signalhaus\n\nLAB\n- Sublevel Defender\n- SBLVL SHOT\n- Seven CRT demos\n\nCONTACT\nhello@sublevel.studio\nsales@sublevel.studio"
+        },
+        {
+          "type": "split", "id": "instrument-title", "plate": "orbit", "plate_first": true, "plate_caption": "Plate II — The instrument, for finding a bearing",
+          "eyebrow": "Why a lab?", "title": "Play is research with better hours.",
+          "paragraphs": [
+            "A game teaches you about timing. A strange interface teaches you about attention. A broken prototype teaches you more than a perfect plan.",
+            "The lab is where we keep that learning visible — untouched by a client brief, and all the better for it."
+          ],
+          "cta": { "text": "Work with us instead", "href": "contact.html" }
+        },
+        { "type": "contact_band", "id": "lab-contact-title", "eyebrow": "Contact • Curious minds", "title": "Have a strange idea?", "email": "hello@sublevel.studio", "cta": { "text": "Send it our way ↗", "href": "contact.html" } },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Newsletter — dispatch 026", "title": "Want the good stuff first?", "text": "Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Unsubscribe in one click.", "subject": "Newsletter signup — dispatch 026" }
+      ],
+      "scripts": ["assets/js/motion-prompt-cells.js"]
+    },
+
+    {
+      "file": "contact.html",
+      "title": "Contact — sublevel.studio",
+      "description": "Contact sublevel.studio — hello@sublevel.studio for new work, sales@sublevel.studio for briefs. Kyoto & remote, open late.",
+      "sections": [
+        {
+          "type": "hero", "id": "contact-title", "plate": "wing",
+          "eyebrow": "Contact • New business & everything else", "title": "Let's build something loud.",
+          "lede": "Tell us what you're making, what's in the way and what you'd like people to remember. We'll take it from there.",
+          "buttons": [
+            { "text": "hello@sublevel.studio", "href": "mailto:hello@sublevel.studio", "style": "accent" },
+            { "text": "sales@sublevel.studio", "href": "mailto:sales@sublevel.studio" }
+          ],
+          "index": ["Kyoto & remote", "Open late", "Reply within two working days"]
+        },
+        {
+          "type": "brief_form", "id": "brief-title", "dark": true, "eyebrow": "Brief us • One message is enough", "title": "Start with the idea.",
+          "paragraphs": [
+            "No forms to fill in twice, no discovery call to book a discovery call. Send a few lines and we'll come back with questions, a point of view and a rough shape for the work.",
+            { "text": "The form opens your email app with everything ready to send. Prefer to write directly? Use ", "link": { "text": "hello@sublevel.studio", "href": "mailto:hello@sublevel.studio" }, "suffix": "." }
+          ],
+          "commands": [ { "num": "›", "text": "hello@sublevel.studio", "copy": "hello@sublevel.studio", "dark": true } ],
+          "recipient": "hello@sublevel.studio", "subject": "New project brief — sublevel.studio", "confirm": true,
+          "submit": "Send the brief ↗",
+          "fields": [
+            { "name": "name", "label": "Your name", "type": "text", "autocomplete": "name", "placeholder": "Ada Lovelace", "required": true },
+            { "name": "email", "label": "Email address", "type": "email", "autocomplete": "email", "placeholder": "you@studio.com", "required": true },
+            { "name": "message", "label": "What are you making?", "type": "textarea", "placeholder": "A few lines about the project, the timeline and the thing you want people to remember.", "required": true, "wide": true }
+          ]
+        },
+        {
+          "type": "cards", "id": "routes-title", "variant": "card", "columns": 2,
+          "eyebrow": "Routes • Where to start", "title": "The right door.",
+          "lede": "Two addresses, one studio. Use whichever fits the conversation.",
+          "items": [
+            { "title": "New business", "text": "Projects, partnerships and brave ideas. We reply within two working days.", "link": { "text": "hello@sublevel.studio ↗", "href": "mailto:hello@sublevel.studio" } },
+            { "title": "Briefs & procurement", "text": "Scopes, statements of work and the paperwork that makes things official.", "link": { "text": "sales@sublevel.studio ↗", "href": "mailto:sales@sublevel.studio" } },
+            { "title": "Careers", "text": "Visual designers and creative developers who care about the last five percent.", "link": { "text": "Open roles ↗", "href": "studio.html" } },
+            { "title": "The lab", "text": "Experiments, strange ideas and things that probably shouldn't work.", "link": { "text": "Enter the lab ↗", "href": "lab.html" } }
+          ]
+        },
+        {
+          "type": "faq", "id": "faq-title", "eyebrow": "Questions • Before you write", "title": "Short answers.",
+          "lede": "The things people ask most often, out in the open.",
+          "items": [
+            { "q": "When will we hear back?", "a": "Within two working days, from a person who has read your note." },
+            { "q": "What should the brief include?", "a": "What you are making, what is in the way, and a rough timeline." },
+            { "q": "Where are you based?", "a": "Kyoto and remote. We work with people in any timezone." }
+          ]
+        },
+        { "type": "newsletter", "id": "newsletter-title", "eyebrow": "Newsletter — dispatch 026", "title": "Want the good stuff first?", "text": "Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Unsubscribe in one click.", "subject": "Newsletter signup — dispatch 026" }
+      ],
+      "scripts": []
+    }
+  ]
+}
