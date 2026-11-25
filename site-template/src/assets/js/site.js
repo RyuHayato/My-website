@@ -13,6 +13,7 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var revealObserver = null;
+  var filterResizeHandler = null;
   var currentPage = location.pathname.split("/").pop() || "index.html";
 
   /* ── per-page enhancement ──────────────────────────────────────────
@@ -78,6 +79,10 @@
        The sliding pill indicator moves over 0.25 s easeInOutCubic; filtered
        cards fade out over 0.2 s, then fade in 0.1 s later over 0.2 s with an
        8 px rise. */
+    if (filterResizeHandler) {
+      window.removeEventListener("resize", filterResizeHandler);
+      filterResizeHandler = null;
+    }
     var filterBar = document.querySelector("[data-filter-bar]");
     if (filterBar) {
       var buttons = Array.prototype.slice.call(filterBar.querySelectorAll("button[data-filter]"));
@@ -145,12 +150,13 @@
       var initial = buttons.filter(function (button) { return button.getAttribute("aria-pressed") === "true"; })[0] || buttons[0];
       if (initial) {
         moveIndicator(initial);
-        window.addEventListener("resize", function () { moveIndicator(initial); });
+        filterResizeHandler = function () {
+          var current = buttons.filter(function (b) { return b.getAttribute("aria-pressed") === "true"; })[0] || initial;
+          moveIndicator(current);
+        };
+        window.addEventListener("resize", filterResizeHandler);
         if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(function () {
-            var current = buttons.filter(function (b) { return b.getAttribute("aria-pressed") === "true"; })[0] || initial;
-            moveIndicator(current);
-          });
+          document.fonts.ready.then(filterResizeHandler);
         }
       }
     }
@@ -243,18 +249,26 @@
 
   /* Lazy-load the Motion Prompt cells script the first time a page needs it. */
   var cellsScript = null, cellsPending = [], cellsLoaded = false;
+  function flushCellsPending() {
+    cellsLoaded = true;
+    cellsPending.forEach(function (fn) { fn(); });
+    cellsPending = [];
+  }
+
   function ensureMotionCells(ready) {
     if (window.MotionPromptCellsRunner) { cellsLoaded = true; ready(); return; }
     cellsPending.push(ready);
     if (cellsScript) return;
+    var existing = document.querySelector('script[src$="motion-prompt-cells.js"], script[src*="motion-prompt-cells.js?"]');
+    if (existing) {
+      cellsScript = existing;
+      existing.addEventListener("load", flushCellsPending);
+      return;
+    }
     cellsScript = document.createElement("script");
     cellsScript.src = "assets/js/motion-prompt-cells.js";
     cellsScript.defer = true;
-    cellsScript.onload = function () {
-      cellsLoaded = true;
-      cellsPending.forEach(function (fn) { fn(); });
-      cellsPending = [];
-    };
+    cellsScript.addEventListener("load", flushCellsPending);
     document.head.appendChild(cellsScript);
   }
 
@@ -810,9 +824,40 @@
     return /\.html?($|[?#])/.test(href);
   }
 
+  function normalizePage(href) {
+    try {
+      var url = new URL(href, location.href);
+      return url.pathname.split("/").pop() || "index.html";
+    } catch (error) {
+      var clean = String(href || "").split("#")[0].split("?")[0];
+      return clean.split("/").pop() || "index.html";
+    }
+  }
+
+  function extractHash(href) {
+    var idx = String(href || "").indexOf("#");
+    return idx >= 0 ? href.slice(idx) : "";
+  }
+
+  function scrollToTarget(hash, smooth) {
+    var behavior = smooth && !reduceMotion.matches ? "smooth" : "auto";
+    if (hash && hash.length > 1) {
+      var rawId = hash.slice(1);
+      var decodedId = rawId;
+      try { decodedId = decodeURIComponent(rawId); } catch (error) { /* keep rawId */ }
+      var target = document.getElementById(decodedId) || document.getElementById(rawId);
+      if (target) {
+        target.scrollIntoView({ behavior: behavior });
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, behavior: behavior });
+  }
+
   function updateNavCurrent(href) {
+    var page = normalizePage(href);
     document.querySelectorAll("#site-nav a[href]").forEach(function (a) {
-      if (a.getAttribute("href") === href) a.setAttribute("aria-current", "page");
+      if (normalizePage(a.getAttribute("href")) === page) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");
     });
   }
@@ -827,10 +872,11 @@
       if (currentDesc) currentDesc.setAttribute("content", desc.getAttribute("content") || "");
     }
     if (newMain) main.innerHTML = newMain.innerHTML;
-    currentPage = href;
-    updateNavCurrent(href);
-    window.scrollTo(0, 0);
+    var page = normalizePage(href);
+    currentPage = page;
+    updateNavCurrent(page);
     initPage();
+    scrollToTarget(extractHash(href), false);
     if (push) {
       try { history.pushState({ plateHref: href }, "", href); } catch (error) { /* sandboxed */ }
     }
@@ -848,7 +894,19 @@
 
   function navigate(href, push) {
     if (!("fetch" in window)) { location.href = href; return; }
-    if (href === currentPage) { window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" }); return; }
+    var page = normalizePage(href);
+    var hash = extractHash(href);
+    if (page === currentPage) {
+      if (hash) {
+        if (push) {
+          try { history.pushState({ plateHref: href }, "", href); } catch (error) { /* sandboxed */ }
+        }
+        scrollToTarget(hash, true);
+      } else {
+        window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
+      }
+      return;
+    }
     if (navigating) return;
     if (reduceMotion.matches) {
       // No veil: swap straight away.
@@ -891,9 +949,9 @@
   });
 
   window.addEventListener("popstate", function () {
-    var path = location.pathname.split("/").pop() || "index.html";
+    var path = normalizePage(location.pathname);
     if (path === currentPage) return; // hash-only changes are left alone
-    navigate(path, false);
+    navigate(location.pathname + location.search + location.hash, false);
   });
 
   /* Small hook for smoke tests. */
