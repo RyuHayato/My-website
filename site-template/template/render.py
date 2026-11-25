@@ -69,7 +69,8 @@ def tags_html(tags) -> str:
 def steps_html(steps, *, extra_class: str = "") -> str:
     if not steps:
         return ""
-    out = [f'<div class="steps"{attr("class", extra_class) if extra_class else ""}>']
+    cls = f"steps {extra_class.strip()}" if extra_class and extra_class.strip() else "steps"
+    out = [f'<div class="{esc(cls)}">']
     for step in steps:
         out.append('<div class="step"><div>')
         out.append(f"<h3>{esc(step.get('title', ''))}</h3>")
@@ -609,8 +610,12 @@ def render_page(page: dict, config: dict, src_root: Path) -> str:
 
 # ── validation and build ────────────────────────────────────────────────────
 
-def validate_config(config: dict) -> list[str]:
+DEFAULT_SRC_ROOT = Path(__file__).resolve().parents[1] / "src"
+
+
+def validate_config(config: dict, src_root: Path | None = None) -> list[str]:
     """Return a list of problems; empty means the config is buildable."""
+    root = src_root if src_root is not None else DEFAULT_SRC_ROOT
     errors = []
     for key in ("identity", "theme", "nav", "ui", "plates", "pages"):
         if key not in config:
@@ -627,7 +632,14 @@ def validate_config(config: dict) -> list[str]:
         if href and not href.startswith(("mailto:", "http")) and href not in files:
             errors.append(f"Nav target has no page: {href}")
     plate_keys = set(config["plates"])
+    for key, plate in config["plates"].items():
+        src = plate.get("src") if isinstance(plate, dict) else None
+        if isinstance(src, str) and src.startswith("assets/") and not (root / src).exists():
+            errors.append(f"Plate {key!r} points at a missing asset: {src!r}")
     for page in config["pages"]:
+        for script in page.get("scripts", []):
+            if isinstance(script, str) and script.startswith("assets/") and not (root / script).exists():
+                errors.append(f"Missing asset {script!r} referenced by {page.get('file')}")
         for section in page.get("sections", []):
             kind = section.get("type")
             if kind not in RENDERERS:
@@ -639,7 +651,7 @@ def validate_config(config: dict) -> list[str]:
                 errors.append(f"Unknown plate key {section['plate']!r} in {page.get('file')}")
             for field in ("src", "href"):
                 value = section.get(field)
-                if isinstance(value, str) and value.startswith("assets/") and not (Path("src") / value).exists():
+                if isinstance(value, str) and value.startswith("assets/") and not (root / value).exists():
                     errors.append(f"Missing asset {value!r} referenced by {page.get('file')}")
     for name, theme in config["theme"].items():
         if not re.fullmatch(r"[a-z-]+", name):
@@ -666,16 +678,9 @@ def validate_config(config: dict) -> list[str]:
 def build_site(config_path: Path, out_dir: Path, src_root: Path) -> list[str]:
     """Validate config, render all pages and copy assets. Returns written filenames."""
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    errors = validate_config(config)
+    errors = validate_config(config, src_root=src_root)
     if errors:
         raise ValueError("Invalid config:\n  - " + "\n  - ".join(errors))
-
-    # plate images must exist on disk; validate_config has no src_root, so this
-    # structural check happens here where the source root is known.
-    for key, plate in config.get("plates", {}).items():
-        src = str(plate.get("src", ""))
-        if src.startswith("assets/") and not (src_root / src).exists():
-            raise ValueError(f"Plate {key!r} points at a missing asset: {src!r}")
 
     out_dir.mkdir(parents=True, exist_ok=True)
     assets_out = out_dir / "assets"
