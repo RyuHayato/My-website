@@ -53,13 +53,14 @@
           <p>The form opens your email app with everything ready to send. Prefer to write directly? Use <a href="mailto:hello@sublevel.studio">hello@sublevel.studio</a>.</p>
           <div class="cmd" style="border-color:#514b3e;background:#211e18;color:var(--night-ink)"><span><span class="num">›</span> hello@sublevel.studio</span><button class="copy" type="button" data-copy="hello@sublevel.studio" style="color:var(--night-soft)">Copy</button></div>
         </div>
-        <form data-mail-form data-confirm data-recipient="hello@sublevel.studio" data-subject="New project brief — sublevel.studio" novalidate data-reveal>
+        <form action="mailto:hello@sublevel.studio" method="post" enctype="text/plain" data-mail-form data-confirm data-recipient="hello@sublevel.studio" data-subject="New project brief — sublevel.studio" novalidate data-reveal>
           <div class="field-grid">
             <div class="field"><label for="contact-name">Your name</label><input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Ada Lovelace" required></div>
             <div class="field"><label for="contact-email">Email address</label><input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@studio.com" required></div>
             <div class="field field--wide"><label for="contact-message">What are you making?</label><textarea id="contact-message" name="message" placeholder="A few lines about the project, the timeline and the thing you want people to remember." required></textarea></div>
           </div>
           <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <noscript><p class="form-status" data-state="ok">Submitting opens your mail app, or write directly to <a href="mailto:hello@sublevel.studio">hello@sublevel.studio</a>.</p></noscript>
           <button class="btn btn--dark" type="submit">Send the brief <span aria-hidden="true">↗</span></button>
         </form>
       </div>
@@ -110,12 +111,13 @@
           <p class="eyebrow">Newsletter — dispatch 026</p>
           <h2 id="newsletter-title">Want the good stuff first?</h2>
           <p>Drops, experiments and the occasional bad idea, sent no more than once a month. No spam. Unsubscribe in one click.</p>
-          <form class="form-row" data-mail-form data-recipient="hello@sublevel.studio" data-subject="Newsletter signup — dispatch 026" novalidate>
+          <form class="form-row" action="mailto:hello@sublevel.studio" method="post" enctype="text/plain" data-mail-form data-recipient="hello@sublevel.studio" data-subject="Newsletter signup — dispatch 026" novalidate>
             <label class="visually-hidden" for="email-contact">Email address</label>
             <input id="email-contact" name="email" type="email" placeholder="you@studio.com" autocomplete="email" required>
             <button class="btn btn--dark" type="submit">Count me in</button>
           </form>
           <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <noscript><p class="form-status" data-state="ok">Submitting opens your mail app, or write directly to <a href="mailto:hello@sublevel.studio">hello@sublevel.studio</a>.</p></noscript>
         </div>
       </div>
     </section>

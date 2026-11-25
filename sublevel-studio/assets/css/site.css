@@ -977,7 +977,7 @@ a:hover { color: var(--ink); }
   color: var(--ink-faint);
   transition: transform 320ms cubic-bezier(.645,.045,.355,1), color 320ms;
 }
-.mp-acc__panel {
+.js .mp-acc__panel {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
@@ -990,8 +990,8 @@ a:hover { color: var(--ink); }
   transform: rotate(180deg);
   transition-duration: 350ms;
 }
-.mp-acc__item.is-open .mp-acc__panel {
-  max-height: 58px;
+.js .mp-acc__item.is-open .mp-acc__panel {
+  max-height: 24rem;
   opacity: 1;
   transition-duration: 350ms;
 }
