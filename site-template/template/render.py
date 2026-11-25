@@ -342,13 +342,18 @@ def render_newsletter(section: dict, config: dict, uid: str) -> str:
         out.append(f"<p>{esc(section['text'])}</p>")
     recipient = section.get("recipient") or config["ui"].get("default_email", "")
     out.append(
-        f'<form class="form-row" data-mail-form data-recipient="{esc(recipient)}" '
+        f'<form class="form-row" action="mailto:{esc(recipient)}" method="post" enctype="text/plain" '
+        f'data-mail-form data-recipient="{esc(recipient)}" '
         f'data-subject="{esc(section.get("subject", "Newsletter signup"))}" novalidate>'
         f'<label class="visually-hidden" for="{esc(email_id)}">Email address</label>'
         f'<input id="{esc(email_id)}" name="email" type="email" placeholder="you@studio.com" autocomplete="email" required>'
         '<button class="btn btn--dark" type="submit">Count me in</button></form>'
     )
     out.append('<p class="form-status" data-form-status role="status" aria-live="polite"></p>')
+    out.append(
+        f'<noscript><p class="form-status" data-state="ok">Submitting opens your mail app, or write directly to '
+        f'<a href="mailto:{esc(recipient)}">{esc(recipient)}</a>.</p></noscript>'
+    )
     out.append("</div></div></section>")
     return "".join(out)
 
@@ -367,7 +372,8 @@ def render_brief_form(section: dict, config: dict) -> str:
     confirm = " data-confirm" if section.get("confirm") else ""
     recipient = section.get("recipient") or config["ui"].get("default_email", "")
     out.append(
-        f'<form data-mail-form{confirm} data-recipient="{esc(recipient)}" '
+        f'<form action="mailto:{esc(recipient)}" method="post" enctype="text/plain" '
+        f'data-mail-form{confirm} data-recipient="{esc(recipient)}" '
         f'data-subject="{esc(section.get("subject", ""))}" novalidate data-reveal>'
     )
     out.append('<div class="field-grid">')
@@ -385,6 +391,10 @@ def render_brief_form(section: dict, config: dict) -> str:
         out.append("</div>")
     out.append("</div>")
     out.append('<p class="form-status" data-form-status role="status" aria-live="polite"></p>')
+    out.append(
+        f'<noscript><p class="form-status" data-state="ok">Submitting opens your mail app, or write directly to '
+        f'<a href="mailto:{esc(recipient)}">{esc(recipient)}</a>.</p></noscript>'
+    )
     out.append(f'<button class="btn{" btn--dark" if dark else ""}" type="submit">{rich(section.get("submit", "Send"))}</button>')
     out.append("</form></div></section>")
     return "".join(out)
